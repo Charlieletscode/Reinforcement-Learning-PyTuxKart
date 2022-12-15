@@ -5,41 +5,41 @@ from .utils import PyTux
 import numpy as np
 
 
-def control(aim_point1, aim_point2, current_vel):
-    ratio = 1.2
-    # ratio = 0.01 # ap1 / ap2 when dis = 5
-    # ratio = 0.3 # ap1 / ap2 when dis = 7
-    # ratio = 1.5 # ap1 / ap2 when dis = 9
-    w1 = 1 - 1/(ratio+1)
-    w2 = 1/(ratio+1)
-    lr = aim_point1[0]*w1 + aim_point2[0]*w2
+# def control(aim_point1, aim_point2, current_vel):
+#     ratio = 1.2
+#     # ratio = 0.01 # ap1 / ap2 when dis = 5
+#     # ratio = 0.3 # ap1 / ap2 when dis = 7
+#     # ratio = 1.5 # ap1 / ap2 when dis = 9
+#     w1 = 1 - 1/(ratio+1)
+#     w2 = 1/(ratio+1)
+#     lr = aim_point1[0]*w1 + aim_point2[0]*w2
 
-    c = 1000000
-    a = 1.5
-    doAcc = True
-    action = pystk.Action()
+#     c = 1000000
+#     a = 1.5
+#     doAcc = True
+#     action = pystk.Action()
 
-    if (abs(lr) > 0.34):
-        action.brake = True
-        if (current_vel > 20):
-            action.drift = True
-            doAcc = False
-        if (abs(lr) < 0.65):
-            action.drift = True
-    if (action.drift != True and abs(lr) < 0.05):
-        action.nitro = True
+#     if (abs(lr) > 0.34):
+#         action.brake = True
+#         if (current_vel > 20):
+#             action.drift = True
+#             doAcc = False
+#         if (abs(lr) < 0.65):
+#             action.drift = True
+#     if (action.drift != True and abs(lr) < 0.05):
+#         action.nitro = True
 
-    if (doAcc):
-        action.acceleration = 1-pow(abs(lr), a)
-    else:
-        action.acceleration = 0.2*(1-pow(abs(lr), a))
+#     if (doAcc):
+#         action.acceleration = 1-pow(abs(lr), a)
+#     else:
+#         action.acceleration = 0.2*(1-pow(abs(lr), a))
 
-    if (lr > 0):
-        action.steer = -pow(c, -lr)+1
-    else:
-        action.steer = pow(c, lr)-1
+#     if (lr > 0):
+#         action.steer = -pow(c, -lr)+1
+#     else:
+#         action.steer = pow(c, lr)-1
 
-    return action
+#     return action
 
 # def control(aim_point1, aim_point2, current_vel):
 #     lr = (aim_point1[0]*0.5+aim_point2[0]*0.5)
@@ -127,51 +127,51 @@ def control(aim_point1, aim_point2, current_vel):
 
 #     return action
 
-# def control(aim_point1, aim_point2, current_vel):
-#     """
-#     Set the Action for the low-level controller
-#     :param aim_point: Aim point, in screen coordinate frame [-1..1]
-#     :param current_vel: Current velocity of the kart
-#     :return: a pystk.Action (set acceleration, brake, steer, drift)
-#     """
-#     lr = (aim_point1[0]*0.33+ aim_point2[0]*0.67)
-#     # ud = aim_point[1]
-#     c = 1000000
-#     a = 1.5
-#     doAcc = True
-#     action = pystk.Action()
+def control(aim_point1, aim_point2, current_vel):
+    """
+    Set the Action for the low-level controller
+    :param aim_point: Aim point, in screen coordinate frame [-1..1]
+    :param current_vel: Current velocity of the kart
+    :return: a pystk.Action (set acceleration, brake, steer, drift)
+    """
+    lr = (aim_point1[0]*0.33+ aim_point2[0]*0.67)
+    # ud = aim_point[1]
+    c = 1000000
+    a = 1.5
+    doAcc = True
+    action = pystk.Action()
 
 
-#     if (abs(lr) > 0.34):
-#         action.brake = True
-#         if (np.abs(np.tan((np.abs(aim_point1[0]-aim_point2[0]))/np.abs((aim_point1[1]-aim_point2[1])+0.001))))>10:
-#             action.drift=True
+    if (abs(lr) > 0.34):
+        action.brake = True
+        if (np.abs(np.tan((np.abs(aim_point1[0]-aim_point2[0]))/np.abs((aim_point1[1]-aim_point2[1])+0.001))))>10:
+            action.drift=True
 
-#         if (current_vel > 20):
-#             action.drift = True
-#             doAcc = False
-#         if (np.abs(lr) < 0.65):
-#             action.drift = True
-#     if (action.drift != True and abs(lr) < 0.05):
-#         action.nitro = True
+        if (current_vel > 20):
+            action.drift = True
+            doAcc = False
+        if (np.abs(lr) < 0.65):
+            action.drift = True
+    if (action.drift != True and abs(lr) < 0.05):
+        action.nitro = True
 
-#     if (doAcc):
-#         action.acceleration = 1-pow(np.abs(lr), a)
-#     else:
-#         action.acceleration = 0.2*(1-pow(np.abs(lr), a))
+    if (doAcc):
+        action.acceleration = 1-pow(np.abs(lr), a)
+    else:
+        action.acceleration = 0.2*(1-pow(np.abs(lr), a))
 
-#     if (lr > 0):
-#         action.steer = -pow(c, -lr)+1
-#     else:
-#         action.steer = pow(c, lr)-1
+    if (lr > 0):
+        action.steer = -pow(c, -lr)+1
+    else:
+        action.steer = pow(c, lr)-1
 
-#     if (abs(aim_point1[0])<0.20):
-#         action.acceleration = 1
+    if (abs(aim_point1[0])<0.20):
+        action.acceleration = 1
 
-#     if current_vel<5.8:
-#         action.acceleration=0.83
+    if current_vel<5.8:
+        action.acceleration=0.83
 
-#     return action
+    return action
 
 def test_controller(pytux, track, verbose=False):
     import numpy as np
