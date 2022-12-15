@@ -1,0 +1,5 @@
+
+pip install PySuperTuxKart==1.1.2
+pip install imageio==2.4.1
+python -m homework.train
+python -m homework.train -c -n 100
