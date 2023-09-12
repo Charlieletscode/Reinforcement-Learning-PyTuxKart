@@ -1,2 +1,3 @@
 # Reinforcement-Learning-PyTuxKart
-https://www.youtube.com/watch?v=KUBg7pmSpEo&ab_channel=CharlieChung
+[![IMAGE ALT TEXT](https://www.youtube.com/watch?v=KUBg7pmSpEo&ab_channel=CharlieChung)](https://www.youtube.com/watch?v=KUBg7pmSpEo&ab_channel=CharlieChung)
+
