@@ -1,3 +1,2 @@
 # Reinforcement-Learning-PyTuxKart
-[link text](https://www.youtube.com/watch?v=KUBg7pmSpEo&ab_channel=CharlieChung)
-
+[![Watch the video](https://github.com/Charlieletscode/Reinforcement-Learning-PyTuxKart/main/car.png)](https://www.youtube.com/watch?v=KUBg7pmSpEo&ab_channel=CharlieChung)
